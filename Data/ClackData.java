@@ -1,23 +1,31 @@
+import java.time.LocalDateTime;
+
 public class ClackData {
-    private:
-        String username;
-        int type;
+    private String username;
+    private int type;
 
+    private Date date;
 
-    public:
-        ClackData(String u, int t) {
+    public ClackData(String u, int t) {
+        username=u;
+        type=t;
+        date=new Date();
+    }
 
-        }
+    public ClackData(int t) {
+    }
 
-        ClackData(int t) {
+    public ClackData() {
+    }
 
-        }
+    public int getType() {
+    }
 
-        ClackData() {
+    public String getUsername() {
+    }
 
-        }
+    public Date getDate(){
+    }
 
-        getType() {
-
-        }
+    public abstract getData();
 }
