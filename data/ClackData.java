@@ -1,6 +1,6 @@
-import java.time.LocalDateTime;
+import java.util.Date;
 
-public class ClackData {
+public abstract class ClackData {
     private String username;
     private int type;
 
@@ -19,13 +19,16 @@ public class ClackData {
     }
 
     public int getType() {
+        return type;
     }
 
     public String getUsername() {
+        return username;
     }
 
     public Date getDate(){
+        return date;
     }
 
-    public abstract getData();
+    public abstract void getData();
 }
