@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class MessageClackData extends ClackData {
     private String message;
 
@@ -13,16 +15,24 @@ public class MessageClackData extends ClackData {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(message, getDate(), getType(), getUsername());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MessageClackData)) return false;
+        MessageClackData that = (MessageClackData) o;
+        return message.equals(that.message);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "MessageClackData{" +
+                "message='" + message + '\'' +
+                ", type=" + getType() +
+                ", username='" + getUsername() + '\'' +
+                ", date=" + getDate() +
+                '}';
     }
 }
