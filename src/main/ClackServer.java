@@ -25,6 +25,7 @@ public class ClackServer {
 
     /**
      * Constructor that sets port number, should set dataToReceiveFromClient and dataToSendToClient as null.
+     * @param port is for the port
      */
     public ClackServer (int port) {
         this.port = port;
@@ -62,6 +63,7 @@ public class ClackServer {
 
     /**
      * Returns the port
+     * @return Integer
      */
     public Integer getPort() {
         return port;
@@ -69,6 +71,7 @@ public class ClackServer {
 
     /**
      * Should be correctly overridden
+     * @return int
      */
     @Override
     public int hashCode () {
@@ -77,6 +80,7 @@ public class ClackServer {
 
     /**
      * Should be correctly overridden
+     * @return boolean
      */
     @Override
     public boolean equals (Object other) {
@@ -94,6 +98,7 @@ public class ClackServer {
 
     /**
      * Should be overridden to return a full description of the class with all instance variables
+     * @return String
      */
     @Override
     public String toString () {

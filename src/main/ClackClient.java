@@ -2,6 +2,10 @@ package main;
 
 import data.ClackData;
 
+/**
+ * main.ClackClient is a class for the client data
+ * @author Jake D'Esposito
+ */
 public class ClackClient {
     /**
      * String representing name of the client
@@ -35,6 +39,9 @@ public class ClackClient {
 
     /**
      * Constructor for username, host name, and port, connection should be set to be open. Should set dataToSendToServer and dataToReceiveFromServer as null.
+     * @param userName is for the username
+     * @param hostName is for the hostname
+     * @param port is for the port
      */
     public ClackClient (String userName, String hostName, int port) {
         this.userName = userName;
@@ -47,6 +54,8 @@ public class ClackClient {
 
     /**
      * Constructor to set up port to default port number 7000, default port number should be set up as constant, this constructor should call another constructor.
+     * @param userName is for the username
+     * @param hostName is for the hostname
      */
     public ClackClient (String userName, String hostName) {
         this(userName, hostName, 7000);
@@ -54,6 +63,7 @@ public class ClackClient {
 
     /**
      * Constructor that sets host name to be localhost (i.e., the server and client programs run on the same computer)
+     * @param userName is for the username
      */
     public ClackClient (String userName) {
         this(userName, "localhost");
@@ -102,7 +112,8 @@ public class ClackClient {
     }
 
     /**
-     * Returns the user name
+     * Returns the username
+     * @return String
      */
     public String getUserName () {
         return userName;
@@ -110,6 +121,7 @@ public class ClackClient {
 
     /**
      * Returns the host name
+     * @return String
      */
     public String getHostName () {
         return hostName;
@@ -117,6 +129,7 @@ public class ClackClient {
 
     /**
      * Returns the port
+     * @return Integer
      */
     public Integer getPort() {
         return port;
@@ -124,6 +137,7 @@ public class ClackClient {
 
     /**
      * Should be correctly overridden
+     * @return int
      */
     @Override
     public int hashCode () {
@@ -132,15 +146,16 @@ public class ClackClient {
 
     /**
      * Should be correctly overridden
+     * @return boolean
      */
     @Override
     public boolean equals (Object other) {
         if (other instanceof ClackClient) {
             ClackClient otherClackClient = (ClackClient) other;
 
-            if (otherClackClient.getUserName() != userName)
+            if (!otherClackClient.getUserName().equals(userName))
                 return false;
-            else if (otherClackClient.getHostName() != hostName)
+            else if (!otherClackClient.getHostName().equals(hostName))
                 return false;
             else if (otherClackClient.getPort() != port)
                 return false;
@@ -153,6 +168,7 @@ public class ClackClient {
 
     /**
      * Should be overridden to return a full description of the class with all instance variables
+     * @return String
      */
     @Override
     public String toString () {
