@@ -12,14 +12,16 @@ public abstract class ClackData {
     private Date date;
 
     /**
-     * The constructor of the class which automaticaly sets the date & tie of creation
+     * <p>The constructor of the class which automaticaly sets the date of creation.</p>
      * public data.ClackData(String u, int t)
      * @param u is for the username
      * @param t is for the type
-     *          1 is for listing all useres conencted to this session
-     *          2 is for logout/close this client's connection
-     *          3 is for send a message
-     *          4 is for send a file
+     *          <ul>
+     *              <li>1 is for listing all users connected to this session</li>
+     *              <li>2 is for logout/close this client's connection</li>
+     *              <li>3 is for send a message</li>
+     *              <li>4 is for send a file</li>
+     *          </ul>
      */
     public ClackData(String u, int t) {
         this.username=u;
@@ -28,36 +30,40 @@ public abstract class ClackData {
     }
 
     /**
-     * The constructor of the class which automaticaly sets the date & tie of creation
-     * and sets the username to anon
+     * <p>The constructor of the class which automaticaly sets the date of creation
+     * and sets the username to anon</p>
      * public data.ClackData(int t)
      * @param t is for the type
-     *          1 is for listing all useres conencted to this session
-     *          2 is for logout/close this client's connection
-     *          3 is for send a message
-     *          4 is for send a file
+     *          <ul>
+     *              <li>1 is for listing all users connected to this session</li>
+     *              <li>2 is for logout/close this client's connection</li>
+     *              <li>3 is for send a message</li>
+     *              <li>4 is for send a file</li>
+     *          </ul>
      */
     public ClackData(int t) { this("Anon", t); }
 
     /**
-     *default constructor which defaults to username anon & type2  logout
+     *<p>default constructor which defaults to username anon and type to 2  logout</p>
      * public data.ClackData()
      */
     public ClackData() { this(2); }
 
     /**
-     *is for checking what type this instance is
+     *<p>is for checking what type this instance is</p>
      * int getType()
      * @return int
-     *          1 is for listing all useres conencted to this session
-     *          2 is for logout/close this client's connection
-     *          3 is for send a message
-     *          4 is for send a file
+     *          <ul>
+     *              <li>1 is for listing all users connected to this session</li>
+     *              <li>2 is for logout/close this client's connection</li>
+     *              <li>3 is for send a message</li>
+     *              <li>4 is for send a file</li>
+     *          </ul>
      */
     public int getType() { return type; }
 
     /**
-     *is for getting the username
+     *<p>is for getting the username</p>
      * String getUsername()
      * @return String
      */
@@ -66,7 +72,7 @@ public abstract class ClackData {
     }
 
     /**
-     *is for getting when the instance was created
+     *<p>is for getting when the instance was created</p>
      * Date getDate()
      * @return Date
      */
@@ -75,7 +81,7 @@ public abstract class ClackData {
     }
 
     /**
-     *is an abstract for getting the data of the object
+     *<p>is an abstract for getting the data of the object</p>
      * abstract String getData()
      * @return n/a
      */

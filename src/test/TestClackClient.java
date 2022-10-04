@@ -1,6 +1,6 @@
 package test;
 
-import main.ClackClient;
+import main.*;
 
 public class TestClackClient {
     public static void main (String[] args) {

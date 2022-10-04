@@ -2,7 +2,7 @@ package main;
 
 import data.ClackData;
 
-class ClackServer {
+public class ClackServer {
     /**
      * integer representing port number on server connected to
      */
@@ -26,7 +26,7 @@ class ClackServer {
     /**
      * Constructor that sets port number, should set dataToReceiveFromClient and dataToSendToClient as null.
      */
-    ClackServer (int port) {
+    public ClackServer (int port) {
         this.port = port;
         dataToReceiveFromClient = null;
         dataToSendToClient = null;
@@ -35,7 +35,7 @@ class ClackServer {
     /**
      * Default constructor that sets port to default port number 7000, default port number should be set up as constant, this constructor should call another constructor.
      */
-    ClackServer () {
+    public ClackServer () {
         this(7000);
     }
 

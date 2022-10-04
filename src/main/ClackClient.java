@@ -2,7 +2,7 @@ package main;
 
 import data.ClackData;
 
-class ClackClient {
+public class ClackClient {
     /**
      * String representing name of the client
      */
@@ -36,7 +36,7 @@ class ClackClient {
     /**
      * Constructor for username, host name, and port, connection should be set to be open. Should set dataToSendToServer and dataToReceiveFromServer as null.
      */
-    ClackClient (String userName, String hostName, int port) {
+    public ClackClient (String userName, String hostName, int port) {
         this.userName = userName;
         this.hostName = hostName;
         this.port = port;
@@ -48,21 +48,21 @@ class ClackClient {
     /**
      * Constructor to set up port to default port number 7000, default port number should be set up as constant, this constructor should call another constructor.
      */
-    ClackClient (String userName, String hostName) {
+    public ClackClient (String userName, String hostName) {
         this(userName, hostName, 7000);
     }
 
     /**
-     * Constructor that sets host name to be “localhost” (i.e., the server and client programs run on the same computer)
+     * Constructor that sets host name to be localhost (i.e., the server and client programs run on the same computer)
      */
-    ClackClient (String userName) {
+    public ClackClient (String userName) {
         this(userName, "localhost");
     }
 
     /**
      * Default constructor that sets anonymous user, should call another constructor.
      */
-    ClackClient () {
+    public ClackClient () {
         this("anonymous");
     }
 
