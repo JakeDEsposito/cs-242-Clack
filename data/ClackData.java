@@ -7,20 +7,16 @@ public abstract class ClackData {
     private Date date;
 
     public ClackData(String u, int t) {
-        username=u;
-        type=t;
-        date=new Date();
+        this.username=u;
+        this.type=t;
+        this.date=new Date();
     }
 
-    public ClackData(int t) {
-    }
+    public ClackData(int t) { this("Anon", t); }
 
-    public ClackData() {
-    }
+    public ClackData() { this(1); }
 
-    public int getType() {
-        return type;
-    }
+    public int getType() { return type; }
 
     public String getUsername() {
         return username;
@@ -30,5 +26,5 @@ public abstract class ClackData {
         return date;
     }
 
-    public abstract void getData();
+    public abstract String getData();
 }

@@ -1,7 +1,5 @@
 public class FileClackData extends ClackData {
 
     @Override
-    public void getData() {
-
-    }
+    public String getData() { return "Placeholder Return value must fix!!!"; }
 }
