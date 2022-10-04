@@ -48,7 +48,7 @@ public class MessageClackData extends ClackData {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(message, getDate(), getType(), getUsername());
+        return Objects.hash(message, getType(), getUsername());
     }
 
     /**
@@ -62,7 +62,7 @@ public class MessageClackData extends ClackData {
         if (this == o) return true;
         if (!(o instanceof MessageClackData)) return false;
         MessageClackData that = (MessageClackData) o;
-        return message.equals(that.message);
+        return (message.equals(that.message)&&getUsername().equals(that.getUsername())&&(getType()==that.getType()));
     }
 
     /**
