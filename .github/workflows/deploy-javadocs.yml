@@ -28,14 +28,23 @@ jobs:
         with:
           java-version: 8
           
-      - name: Generate Javadoc
+      - name: Generate Javadoc 📃
         run: |
           cd src
           javadoc -d doc -author main data
-        
+
+  deploy:
+    needs: javadoc
+    runs-on: ubuntu-latest
+    name: Deploy to Github Pages    
+      steps: 
       - name: Deploy to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages
           folder: src/doc
           clean: true
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
