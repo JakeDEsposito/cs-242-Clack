@@ -1,3 +1,5 @@
+package data;
+
 import java.util.Objects;
 
 public class MessageClackData extends ClackData {
@@ -28,7 +30,7 @@ public class MessageClackData extends ClackData {
 
     @Override
     public String toString() {
-        return "MessageClackData{" +
+        return "data.MessageClackData{" +
                 "message='" + message + '\'' +
                 ", type=" + getType() +
                 ", username='" + getUsername() + '\'' +

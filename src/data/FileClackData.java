@@ -1,3 +1,5 @@
+package data;
+
 import java.util.Objects;
 
 public class FileClackData extends ClackData {
@@ -38,7 +40,7 @@ public class FileClackData extends ClackData {
 
     @Override
     public String toString() {
-        return "FileClackData{" +
+        return "data.FileClackData{" +
                 "fileName='" + fileName + '\'' +
                 ", fileContents='" + fileContents + '\'' +
                 ", type=" + getType() +

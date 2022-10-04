@@ -1,3 +1,7 @@
+package main;
+
+import data.ClackData;
+
 class ClackClient {
     /**
      * String representing name of the client
@@ -20,12 +24,12 @@ class ClackClient {
     private boolean closeConnection;
 
     /**
-     * ClackData object representing data sent to server
+     * data.ClackData object representing data sent to server
      */
     private ClackData dataToSendToServer;
 
     /**
-     * ClackData object representing data received from the server
+     * data.ClackData object representing data received from the server
      */
     private ClackData dataToReceiveFromServer;
 

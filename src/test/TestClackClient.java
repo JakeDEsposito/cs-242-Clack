@@ -1,3 +1,7 @@
+package test;
+
+import main.ClackClient;
+
 public class TestClackClient {
     public static void main (String[] args) {
         ClackClient c1 = new ClackClient("User1", "Host1", 100);
@@ -7,7 +11,7 @@ public class TestClackClient {
 
         System.out.println("Should return true: " + c1.equals(c1a));
         System.out.println("Should return false: " + c1.equals(c2));
-        System.out.println("ClackServer s3 hashCode(): " + c3.hashCode());
-        System.out.println("ClackServer s3 toString(): " + c3);
+        System.out.println("main.ClackServer s3 hashCode(): " + c3.hashCode());
+        System.out.println("main.ClackServer s3 toString(): " + c3);
     }
 }

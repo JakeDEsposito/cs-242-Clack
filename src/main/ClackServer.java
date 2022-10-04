@@ -1,3 +1,7 @@
+package main;
+
+import data.ClackData;
+
 class ClackServer {
     /**
      * integer representing port number on server connected to
@@ -10,12 +14,12 @@ class ClackServer {
     private boolean closeConnection;
 
     /**
-     * ClackData object representing data received from the client
+     * data.ClackData object representing data received from the client
      */
     private ClackData dataToReceiveFromClient;
 
     /**
-     * ClackData object representing data sent to client
+     * data.ClackData object representing data sent to client
      */
     private ClackData dataToSendToClient;
 
