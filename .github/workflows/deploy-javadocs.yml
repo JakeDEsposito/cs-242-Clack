@@ -32,6 +32,11 @@ jobs:
         run: |
           cd src
           javadoc -d doc -author main data
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: src/doc/*
         
       - name: Deploy to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
