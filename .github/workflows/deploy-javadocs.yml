@@ -29,7 +29,10 @@ jobs:
           java-version: 8
           
       - name: Generate Javadoc
-        run: cd src & javadoc -d doc -author main data
+        run: |
+        cd src
+        ls
+        javadoc -d doc -author main data
         
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.5.9
