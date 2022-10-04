@@ -30,9 +30,9 @@ jobs:
           
       - name: Generate Javadoc
         run: |
-        cd src
-        ls
-        javadoc -d doc -author main data
+          cd src
+          ls
+          javadoc -d doc -author main data
         
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.5.9
