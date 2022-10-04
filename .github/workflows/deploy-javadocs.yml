@@ -33,6 +33,15 @@ jobs:
           cd src
           javadoc -d doc -author main data
 
+  deploy:
+    name: Deploy to Github Pages
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+    
+    steps:
       - name: Deploy to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
