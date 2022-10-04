@@ -26,8 +26,7 @@ jobs:
 
       - uses: actions/setup-java@v1
         with:
-          java-version: 11
-          java-package: jdk+fx
+          java-version: 8
           
       - name: Generate Javadoc
         run: javadoc -d doc -author main data
