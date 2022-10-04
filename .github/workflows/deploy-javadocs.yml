@@ -33,11 +33,6 @@ jobs:
           cd src
           javadoc -d doc -author main data
 
-  deploy:
-    needs: javadoc
-    runs-on: ubuntu-latest
-    name: Deploy to Github Pages    
-      steps: 
       - name: Deploy to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
