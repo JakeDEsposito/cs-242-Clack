@@ -11,6 +11,7 @@ public class TestClackData {
         FileClackData ft4=new FileClackData("user2","file1",3);
         FileClackData ft5=new FileClackData("user2","file2",2);
         FileClackData ft6=new FileClackData("user2","file2",1);
+        FileClackData ft8=new FileClackData(null,null,2);
 
         //test cases of MessageClackData
         MessageClackData mt1=new MessageClackData("user1","message1",3);
@@ -19,6 +20,7 @@ public class TestClackData {
         MessageClackData mt4=new MessageClackData("user2","message1",3);
         MessageClackData mt5=new MessageClackData("user2","message2",2);
         MessageClackData mt6=new MessageClackData("user2","message2",1);
+        MessageClackData mt8=new MessageClackData(null,null,2);
 
 
         //testing of FileClackData
@@ -39,6 +41,8 @@ public class TestClackData {
         System.out.println("\tequals output:\t"+ft1.equals(ft5));
         System.out.println("\tequals output:\t"+ft1.equals(ft6));
         System.out.println("\tequals output:\t"+ft2.equals(ft6));
+        System.out.println("\tequals output:\t"+ft1.equals(ft8));
+        System.out.println("\tequals output:\t"+ft5.equals(ft8));
 
         //testing of MessageClackData
         System.out.println("MessageClackData testing:");
@@ -54,6 +58,8 @@ public class TestClackData {
         System.out.println("\tequals output:\t"+mt1.equals(mt5));
         System.out.println("\tequals output:\t"+mt1.equals(mt6));
         System.out.println("\tequals output:\t"+mt2.equals(mt6));
+        System.out.println("\tequals output:\t"+mt1.equals(mt8));
+        System.out.println("\tequals output:\t"+mt5.equals(mt8));
 
         //testing of interoperability between FileClackData and MessageClackData
         System.out.println("Data interoperability testing");
