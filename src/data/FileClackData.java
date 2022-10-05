@@ -11,7 +11,7 @@ public class FileClackData extends ClackData {
     private String fileContents;
 
     /**
-     * <p>The constructor of the class which automaticaly sets the date of creation.</p>
+     * <p>The constructor of the class which automatically sets the date of creation.</p>
      * public data.FileClackData(String u, String fN, int t)
      * @param u is for the username
      * @param fN is for the file name

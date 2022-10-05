@@ -16,7 +16,7 @@ public abstract class ClackData {
     public final int CONSTANT_SENDFILE=3;
 
     /**
-     * <p>The constructor of the class which automaticaly sets the date of creation.</p>
+     * <p>The constructor of the class which automatically sets the date of creation.</p>
      * public data.ClackData(String u, int t)
      * @param u is for the username
      * @param t is for the type
@@ -34,7 +34,7 @@ public abstract class ClackData {
     }
 
     /**
-     * <p>The constructor of the class which automaticaly sets the date of creation
+     * <p>The constructor of the class which automatically sets the date of creation
      * and sets the username to anon</p>
      * public data.ClackData(int t)
      * @param t is for the type
