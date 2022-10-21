@@ -13,5 +13,9 @@ public class TestClackClient {
         System.out.println("Should return false: " + c1.equals(c2));
         System.out.println("main.ClackServer s3 hashCode(): " + c3.hashCode());
         System.out.println("main.ClackServer s3 toString(): " + c3);
+
+        System.out.println("User name should be User1: " + c1.getUserName());
+        System.out.println("Host name should be Host1: " + c1.getHostName());
+        System.out.println("Port number should be 100: " + c1.getPort());
     }
 }

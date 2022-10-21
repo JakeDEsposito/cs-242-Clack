@@ -8,6 +8,11 @@ import data.ClackData;
  */
 public class ClackClient {
     /**
+     * Default Port for Clack Client
+     */
+    private static final int DEFAULT_PORT = 7000;
+
+    /**
      * String representing name of the client
      */
     private String userName;
@@ -58,7 +63,7 @@ public class ClackClient {
      * @param hostName is for the hostname
      */
     public ClackClient (String userName, String hostName) {
-        this(userName, hostName, 7000);
+        this(userName, hostName, DEFAULT_PORT);
     }
 
     /**
@@ -172,7 +177,7 @@ public class ClackClient {
      */
     @Override
     public String toString () {
-        return "Username: " + userName + ", Hostname: " + hostName + ", Port: " + port;
+        return "Username: " + userName + ", Hostname: " + hostName + ", Port: " + port + ", closeConnection: " + closeConnection;
     }
 
 }
