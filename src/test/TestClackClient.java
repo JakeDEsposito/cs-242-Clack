@@ -17,5 +17,8 @@ public class TestClackClient {
         System.out.println("User name should be User1: " + c1.getUserName());
         System.out.println("Host name should be Host1: " + c1.getHostName());
         System.out.println("Port number should be 100: " + c1.getPort());
+
+        c1.start();
+        c1.readClientData();
     }
 }
