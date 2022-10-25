@@ -13,5 +13,7 @@ public class TestClackServer {
         System.out.println("Should return false: " + s1.equals(s2));
         System.out.println("main.ClackServer s3 hashCode(): " + s3.hashCode());
         System.out.println("main.ClackServer s3 toString(): " + s3);
+
+        System.out.println("Port number should be 100: " + s1.getPort());
     }
 }

@@ -4,6 +4,11 @@ import data.ClackData;
 
 public class ClackServer {
     /**
+     * Default Port for Clark Client
+     */
+    private static final int DEFAULT_PORT = 7000;
+
+    /**
      * integer representing port number on server connected to
      */
     private int port;
@@ -37,7 +42,7 @@ public class ClackServer {
      * Default constructor that sets port to default port number 7000, default port number should be set up as constant, this constructor should call another constructor.
      */
     public ClackServer () {
-        this(7000);
+        this(DEFAULT_PORT);
     }
 
     /**

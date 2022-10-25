@@ -90,4 +90,51 @@ public abstract class ClackData {
      * @return n/a
      */
     public abstract String getData();
+
+    /**
+     * Encrypts a string with the given key using V Cipher
+     * @param inputStringToEncrypt is the input string that will be encrypted
+     * @param key is the key that will be used to encrypt the input string
+     *
+     * @return The encrypted string
+     */
+    protected String encrypt (String inputStringToEncrypt, String key) {
+        String encrypted = "";
+
+        for (int i = 0, j = 0; i < inputStringToEncrypt.length(); ++i) {
+            char c = inputStringToEncrypt.charAt(i);
+            if (c >= 'a' && c <= 'z')
+                c += 'A' - 'a';
+            else if (c < 'A' || c > 'Z')
+                continue;
+            encrypted += (c + key.charAt(j) - 2 * 'A') % 26 + 'A';
+            j = (j + 1) % key.length();
+        }
+
+        return encrypted;
+    }
+
+    /**
+     * Decrypts a string with the given key using V Cipher
+     *
+     * @param inputStringToDecrypt is the encrypted string that will be decrypted
+     * @param key is the key that will be used to decrypt the string
+     *
+     * @return The decrypted string
+     */
+    protected String decrypt (String inputStringToDecrypt, String key) {
+        String decrypted = "";
+
+        for (int i = 0, j = 0; i < inputStringToDecrypt.length(); ++i) {
+            char c = inputStringToDecrypt.charAt(i);
+            if (c >= 'a' && c <= 'z')
+                c += 'A' - 'a';
+            else if (c < 'A' || c > 'Z')
+                continue;
+            decrypted += (c - key.charAt(j) + 26) % 26 + 'A';//added 'A' to bring it in range of ASCII alphabet [ 65-90 | A-Z ]
+            j = (j + 1) % key.length();
+        }
+
+        return decrypted;
+    }
 }
