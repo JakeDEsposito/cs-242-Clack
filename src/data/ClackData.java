@@ -92,6 +92,14 @@ public abstract class ClackData {
     public abstract String getData();
 
     /**
+     * <p>is an abstract for getting the data of the object</p>
+     * abstract String getData(String k)
+     * @param k is the key for decrypting the message
+     * @retur n/a
+     */
+    public abstract String getData(String k);
+
+    /**
      * Encrypts a string with the given key using V Cipher
      * @param inputStringToEncrypt is the input string that will be encrypted
      * @param key is the key that will be used to encrypt the input string

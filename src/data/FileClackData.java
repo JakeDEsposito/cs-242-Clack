@@ -1,5 +1,6 @@
 package data;
 
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -58,16 +59,28 @@ public class FileClackData extends ClackData {
     public String getData() { return fileContents; }
 
     /**
+     * <p>is for getting the file contents of the object</p>
+     * String getData(String k)
+     * @param k is the key for decrypting the message
+     * @return returns the decrypted fileContents
+     */
+    public String getData(String k){ return decrypt(fileContents, k); }
+
+    /**
      * <p>TBD</p>
      * void readFileContents()
      */
-    public void readFileContents() {}
+    public void readFileContents() throws IOException {}
+
+    public void readFileContents(String k) throws IOException {}
 
     /**
      * <p>TBD</p>
      * void writeFileContents()
      */
     public void writeFileContents() {}
+
+    public void writeFileContents(String k) {}
 
     /**
      * <p>is for generating the hashCode of the object</p>

@@ -28,6 +28,26 @@ public class MessageClackData extends ClackData {
     }
 
     /**
+     * <p>The constructor of the class which automatically sets the date of creation
+     * and encrypts the message</p>
+     * public data.MessageClackData(String u, String m, String k, int t)
+     * @param u is for the username
+     * @param m is for the instant message contents
+     * @param k is for the encryption key
+     * @param t is for the type
+     *          <ul>
+     *              <li>1 is for listing all users connected to this session</li>
+     *              <li>2 is for logout/close this client's connection</li>
+     *              <li>3 is for send a message</li>
+     *              <li>4 is for send a file</li>
+     *          </ul>
+     */
+    public MessageClackData(String u, String m, String k, int t){
+        super(u, t);
+        this.message=encrypt(m, k);
+    }
+
+    /**
      *<p>default constructor which defaults to username anon and type 2  logout</p>
      * public data.MessageClackData()
      */
@@ -40,6 +60,14 @@ public class MessageClackData extends ClackData {
      */
     @Override
     public String getData() { return message; }
+
+    /**
+     *<p>default constructor which defaults to username anon and type 2  logout</p>
+     * public data.MessageClackData(String k)
+     * @param k is the key for decrypting the message
+     * @return returns the decrypted message
+     */
+    public String getData(String k) { return decrypt(message, k); }
 
     /**
      * <p>is for generating and returning the hash code of the object</p>
