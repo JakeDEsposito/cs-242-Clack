@@ -10,10 +10,10 @@ public abstract class ClackData {
     private String username;
     private int type;
     private Date date;
-    public final int CONSTANT_LISTUSERS=0;
-    public final int CONSTANT_LOGOUT=1;
-    public final int CONSTANT_SENDMESSAGE=2;
-    public final int CONSTANT_SENDFILE=3;
+    public final static int CONSTANT_LISTUSERS=0;
+    public final static int CONSTANT_LOGOUT=1;
+    public final static int CONSTANT_SENDMESSAGE=2;
+    public final static int CONSTANT_SENDFILE=3;
 
     /**
      * <p>The constructor of the class which automatically sets the date of creation.</p>
