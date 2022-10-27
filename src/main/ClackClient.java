@@ -4,6 +4,7 @@ import data.ClackData;
 import data.FileClackData;
 import data.MessageClackData;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -80,7 +81,7 @@ public class ClackClient {
      * @param userName is for the username
      * @param hostName is for the hostname
      */
-    public ClackClient (String userName, String hostName) {
+    public ClackClient (String userName, String hostName) throws IllegalArgumentException {
         this(userName, hostName, DEFAULT_PORT);
     }
 
@@ -88,7 +89,7 @@ public class ClackClient {
      * Constructor that sets host name to be localhost (i.e., the server and client programs run on the same computer)
      * @param userName is for the username
      */
-    public ClackClient (String userName) {
+    public ClackClient (String userName) throws IllegalArgumentException {
         this(userName, "localhost");
     }
 
@@ -117,30 +118,30 @@ public class ClackClient {
      * Reads the data from the client, does not return anything, for now it should have no code, just a declaration
      */
     public void readClientData () {
-        while(inFromStd.hasNext()) {
-            String nextString = inFromStd.next();
+        String nextString = inFromStd.next();
 
-            System.out.println(nextString);
-
-            switch (nextString) {
-                case "DONE":
-                    closeConnection = false;
+        switch (nextString) {
+            case "DONE":
+                closeConnection = true;
+                break;
+            case "SENDFILE":
+                if (!inFromStd.hasNext()) {
+                    System.out.println("No file provided");
                     break;
-                case "SENDFILE":
-                    if (!inFromStd.hasNext()) {
-                        System.out.println("No file provided");
-                        break;
-                    }
-                    dataToSendToServer = new FileClackData(userName, inFromStd.next(), dataToSendToServer.CONSTANT_SENDFILE);
-                    // TODO: Attempt to read file and reset dataToSendToServer back to null if it fails
-                    break;
-                case "LISTUSERS":
-                    // TODO: Will be implemented in next part
-                    break;
-                default:
-                    // TODO: What is type variable set to CONSTANT_SENDMESSAGE
-                    dataToSendToServer = new MessageClackData(userName, nextString, dataToSendToServer.CONSTANT_SENDMESSAGE);
-            }
+                }
+                dataToSendToServer = new FileClackData(userName, inFromStd.next(), dataToSendToServer.CONSTANT_SENDFILE);
+                try {
+                    ((FileClackData)dataToSendToServer).readFileContents();
+                } catch (IOException e) {
+                    dataToSendToServer = null;
+                }
+                break;
+            case "LISTUSERS":
+                // TODO: Will be implemented in next part
+                break;
+            default:
+                // TODO: What is type variable set to CONSTANT_SENDMESSAGE
+                dataToSendToServer = new MessageClackData(userName, nextString, dataToSendToServer.CONSTANT_SENDMESSAGE);
         }
     }
 
