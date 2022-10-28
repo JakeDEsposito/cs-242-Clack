@@ -113,7 +113,11 @@ public class ClackClient {
 
             if (dataToSendToServer != null)
                 printData();
+            else
+                System.err.println("Nothing to send to server!");
         }
+
+        // inFromStd.close();
     }
 
     /**
