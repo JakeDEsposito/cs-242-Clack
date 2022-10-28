@@ -129,7 +129,7 @@ public class ClackClient {
                     System.out.println("No file provided");
                     break;
                 }
-                dataToSendToServer = new FileClackData(userName, inFromStd.next(), dataToSendToServer.CONSTANT_SENDFILE);
+                dataToSendToServer = new FileClackData(userName, inFromStd.next(), ClackData.CONSTANT_SENDFILE);
                 try {
                     ((FileClackData)dataToSendToServer).readFileContents();
                 } catch (IOException e) {
@@ -141,7 +141,7 @@ public class ClackClient {
                 break;
             default:
                 // TODO: What is type variable set to CONSTANT_SENDMESSAGE
-                dataToSendToServer = new MessageClackData(userName, nextString, dataToSendToServer.CONSTANT_SENDMESSAGE);
+                dataToSendToServer = new MessageClackData(userName, nextString, ClackData.CONSTANT_SENDMESSAGE);
         }
     }
 
@@ -168,7 +168,7 @@ public class ClackClient {
 
         String data = cData.getData();
         String user = cData.getUsername();
-        System.out.println("Received " + data + " from " + user);
+        System.out.println(user + " sent " + data);
     }
 
     /**
@@ -217,7 +217,7 @@ public class ClackClient {
                 return false;
             else if (!otherClackClient.getHostName().equals(hostName))
                 return false;
-            else if (otherClackClient.getPort() != port)
+            else if (!otherClackClient.getPort().equals(port))
                 return false;
             else
                 return true;
