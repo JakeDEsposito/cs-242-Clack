@@ -1,5 +1,6 @@
 package data;
 
+import java.io.*;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -66,21 +67,82 @@ public class FileClackData extends ClackData {
      */
     public String getData(String k){ return decrypt(fileContents, k); }
 
-    /**
-     * <p>TBD</p>
-     * void readFileContents()
+    /* is for opening a file reading its contents closing the file and returning the contents
      */
-    public void readFileContents() throws IOException {}
+    private String readFile() throws IOException{
+        String contents="";
+        File file=new File(fileName);
+        try{
+            BufferedReader buffer=new BufferedReader(new FileReader(file));
+            String nextLine;
+            if((nextLine= buffer.readLine())!=null){
+                contents=contents.concat(nextLine);
+            }
+            while ((nextLine=buffer.readLine())!=null){
+                contents=contents.concat("\n").concat(nextLine);
+            }
+            buffer.close();
+        } catch (FileNotFoundException fife) {
+            System.err.println("The file "+fileName+" can not be found.");
+        } catch (IOException ioe) {
+            System.err.println("Error in opening, writing to, or closing the file.");
+        }
+        return contents;
+    }
 
-    public void readFileContents(String k) throws IOException {}
+    /**
+     * <p>method to read the file contents in the file specified by fileName parameter</p>
+     * void readFileContents()
+     * @throws IOException if there is an error in opening, writing to, or closing the file
+     */
+    public void readFileContents() throws IOException {
+        fileContents=readFile();
+    }
+
+    /**
+     * <p>method to read the file contents in the file specified by fileName parameter and
+     * encrypt the contents of the file</p>
+     * void readFileContents(String k)
+     * @param k is the key for encrypting the file contents
+     * @throws IOException if there is an error in opening, writing to, or closing the file
+     */
+    public void readFileContents(String k) throws IOException {
+        fileContents=encrypt(readFile(), k);
+    }
+
+    /*
+     */
+    private void writeFile(String contents) throws IOException{
+        File file=new File(fileName);
+        try{
+            BufferedWriter buffer=new BufferedWriter(new FileWriter(file));
+            buffer.write(contents);
+            buffer.close();
+        } catch (FileNotFoundException fife) {
+            System.err.println("File does not exist.");
+        } catch (IOException ioe) {
+            System.err.println("Error in opening, writing to, or closing the file.");
+        }
+    }
 
     /**
      * <p>TBD</p>
      * void writeFileContents()
+     * @throws IOException if there is an error in opening, writing to, or closing the file
      */
-    public void writeFileContents() {}
+    public void writeFileContents() throws IOException{
+        writeFile(fileContents);
+    }
 
-    public void writeFileContents(String k) {}
+    /**
+     * <p></p>
+     * void writeFileContents(String k)
+     * @param k is the key for decrypting the file contents
+     * @throws IOException if there is an error in opening, writing to, or closing the file
+     */
+    public void writeFileContents(String k) throws IOException{
+        writeFile(decrypt(fileContents, k));
+    }
 
     /**
      * <p>is for generating the hashCode of the object</p>
