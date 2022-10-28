@@ -95,7 +95,7 @@ public abstract class ClackData {
      * <p>is an abstract for getting the data of the object</p>
      * abstract String getData(String k)
      * @param k is the key for decrypting the message
-     * @retur n/a
+     * @return n/a
      */
     public abstract String getData(String k);
 
