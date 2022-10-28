@@ -2,6 +2,8 @@ package test;
 
 import data.*;
 
+import java.io.IOException;
+
 public class TestClackData {
     public static void main(String[] args) {
         //test cases of FileClackData
@@ -23,6 +25,7 @@ public class TestClackData {
         MessageClackData mt6=new MessageClackData("user2","message2",1);
         MessageClackData mt8=new MessageClackData(null,null,2);
         MessageClackData mt9=new MessageClackData();
+        MessageClackData mt10=new MessageClackData("user", "message", "key", 3);
 
 
         //testing of FileClackData
@@ -66,11 +69,29 @@ public class TestClackData {
         System.out.println("\tequals output:\t"+mt5.equals(mt8));
         System.out.println("\tUsername output:\t"+mt9.getUsername()
                 +"\n\tType output:\t"+mt9.getType());
+        System.out.println("\tMessage output:\t"+mt10.getData("key"));
 
         //testing of interoperability between FileClackData and MessageClackData
         System.out.println("Data interoperability testing");
         FileClackData ft7=new FileClackData("name","data",2);
         MessageClackData mt7=new MessageClackData("name","data",2);
         System.out.println("\tIf FileClackData==MessageClackData:\t"+ft7.equals(mt7)+"\t"+mt7.equals(ft7));
+
+        //testing of read and write methods
+        ft1.setFileName("testing.test");
+        try{
+            String test;
+            ft1.readFileContents();
+            ft1.setFileName("testing2.test");
+            test=ft1.getData();
+            ft1.writeFileContents();
+            ft1.readFileContents("key");
+            ft1.setFileName("testing.test");
+            ft1.writeFileContents("key");
+            test=ft1.getData("key");
+        } catch (IOException ioe) {
+            System.err.println("IOE exception");
+        }
+
     }
 }

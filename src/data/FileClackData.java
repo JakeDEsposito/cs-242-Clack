@@ -110,7 +110,7 @@ public class FileClackData extends ClackData {
         fileContents=encrypt(readFile(), k);
     }
 
-    /*
+    /* is for opening/creating a file writing its contents closing the file
      */
     private void writeFile(String contents) throws IOException{
         File file=new File(fileName);
@@ -126,7 +126,8 @@ public class FileClackData extends ClackData {
     }
 
     /**
-     * <p>TBD</p>
+     * <p>method to write the file contents in the file specified by fileName parameter after
+     * decrypting the contents of the file</p>
      * void writeFileContents()
      * @throws IOException if there is an error in opening, writing to, or closing the file
      */
@@ -135,7 +136,8 @@ public class FileClackData extends ClackData {
     }
 
     /**
-     * <p></p>
+     * <p>method to write the file contents in the file specified by fileName parameter after
+     * decrypting the contents of the file</p>
      * void writeFileContents(String k)
      * @param k is the key for decrypting the file contents
      * @throws IOException if there is an error in opening, writing to, or closing the file

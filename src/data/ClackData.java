@@ -100,7 +100,7 @@ public abstract class ClackData {
     public abstract String getData(String k);
 
     /**
-     * Encrypts a string with the given key using V Cipher
+     * Encrypts a string with the given key using Vigenère cipher
      * @param inputStringToEncrypt is the input string that will be encrypted
      * @param key is the key that will be used to encrypt the input string
      *
@@ -123,7 +123,7 @@ public abstract class ClackData {
     }
 
     /**
-     * Decrypts a string with the given key using V Cipher
+     * Decrypts a string with the given key using Vigenère cipher
      *
      * @param inputStringToDecrypt is the encrypted string that will be decrypted
      * @param key is the key that will be used to decrypt the string
