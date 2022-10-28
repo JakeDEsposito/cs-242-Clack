@@ -110,7 +110,9 @@ public class ClackClient {
 
         while (!closeConnection) {
             readClientData();
-            printData();
+
+            if (dataToSendToServer != null)
+                printData();
         }
     }
 
