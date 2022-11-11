@@ -5,6 +5,9 @@ import data.FileClackData;
 import data.MessageClackData;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.Scanner;
 
 /**
@@ -53,6 +56,16 @@ public class ClackClient {
     private Scanner inFromStd;
 
     /**
+     * ObjectInputStream for incoming data
+     */
+    private ObjectInputStream inFromServer;
+
+    /**
+     * ObjectOutputStream for outgoing data
+     */
+    private ObjectOutputStream outToServer;
+
+    /**
      * Constructor for username, host name, and port, connection should be set to be open. Should set dataToSendToServer and dataToReceiveFromServer as null.
      * @param userName is for the username
      * @param hostName is for the hostname
@@ -74,6 +87,8 @@ public class ClackClient {
         closeConnection = false;
         dataToSendToServer = null;
         dataToReceiveFromServer = null;
+        inFromServer = null;
+        outToServer = null;
     }
 
     /**
@@ -106,11 +121,29 @@ public class ClackClient {
     public void start () {
         inFromStd = new Scanner(System.in);
 
-        closeConnection = false;
+        try {
+            Socket s = new Socket(hostName, port);
 
-        while (!closeConnection) {
-            readClientData();
-            printData();
+            outToServer = new ObjectOutputStream(s.getOutputStream());
+            inFromServer = new ObjectInputStream(s.getInputStream());
+
+            closeConnection = false;
+
+            while (!closeConnection) {
+                readClientData();
+
+                sendData();
+
+                receiveData();
+
+                printData();
+            }
+
+            outToServer.close();
+            inFromServer.close();
+            s.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -149,22 +182,31 @@ public class ClackClient {
      * Sends data to server, does not return anything, for now it should have no code, just a declaration
      */
     public void sendData () {
-
+        try {
+            outToServer.writeObject(dataToSendToServer);
+        } catch (IOException ioe) {
+            System.err.println(ioe);
+        }
     }
 
     /**
      * Receives data from the server, does not return anything for now it should have no code, just a declaration
      */
     public void receiveData () {
-
+        try {
+            dataToReceiveFromServer = (ClackData)inFromServer.readObject();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
      * Prints the received data to standard output, for now it should have no code, just a declaration
      */
     public void printData () {
-        // TEMP: This will be replaced with dataToReceiveFromServer later on
-        ClackData cData = dataToSendToServer; //dataToReceiveFromServer
+        ClackData cData = dataToReceiveFromServer;
 
         String data = cData.getData();
         String user = cData.getUsername();

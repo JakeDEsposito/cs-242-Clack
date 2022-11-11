@@ -2,6 +2,12 @@ package main;
 
 import data.ClackData;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 public class ClackServer {
     /**
      * Default Port for Clark Client
@@ -11,7 +17,7 @@ public class ClackServer {
     /**
      * integer representing port number on server connected to
      */
-    private int port;
+    private final int port;
 
     /**
      * boolean representing whether connection is closed or not
@@ -29,13 +35,28 @@ public class ClackServer {
     private ClackData dataToSendToClient;
 
     /**
+     * ObjectOutputStream for sending data from client
+     */
+    private ObjectOutputStream outToClient;
+
+    /**
+     * ObjectInputStream for receiving data from client
+     */
+    private ObjectInputStream inFromClient;
+
+    /**
      * Constructor that sets port number, should set dataToReceiveFromClient and dataToSendToClient as null.
      * @param port is for the port
      */
-    public ClackServer (int port) {
+    public ClackServer (int port) throws IllegalArgumentException {
+        if (port < 1024)
+            throw new IllegalArgumentException("port is less than 1024");
+
         this.port = port;
         dataToReceiveFromClient = null;
         dataToSendToClient = null;
+        outToClient = null;
+        inFromClient = null;
     }
 
     /**
@@ -49,6 +70,33 @@ public class ClackServer {
      * Does not return anything, for now it should have no code, just a declaration
      */
     public void start () {
+        try {
+            ServerSocket ss = new ServerSocket(port);
+            Socket s = ss.accept();
+
+            outToClient = new ObjectOutputStream(s.getOutputStream());
+            inFromClient = new ObjectInputStream(s.getInputStream());
+
+            closeConnection = false;
+
+            while (!closeConnection) {
+                receiveData();
+
+                dataToSendToClient = dataToReceiveFromClient;
+
+                sendData();
+
+                if (!s.isBound())
+                    closeConnection = true;
+            }
+
+            outToClient.close();
+            inFromClient.close();
+            s.close();
+            ss.close();
+        } catch (IOException ioe) {
+            System.err.println(ioe);
+        }
 
     }
 
@@ -56,14 +104,22 @@ public class ClackServer {
      * Receives data from client, does not return anything for now it should have no code, just a declaration
      */
     public void receiveData () {
-
+        try {
+            dataToReceiveFromClient = (ClackData)inFromClient.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println(e);
+        }
     }
 
     /**
      * Sends data to client, does not return anything, for now it should have no code, just a declaration
      */
     public void sendData () {
-
+        try {
+            outToClient.writeObject(dataToSendToClient);
+        } catch (IOException ioe) {
+            System.err.println(ioe);
+        }
     }
 
     /**

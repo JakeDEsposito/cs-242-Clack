@@ -1,12 +1,13 @@
 package data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * data.ClackData is an abstract class that all subsequent data classes are based on
  * @author Graham Zarriello
  */
-public abstract class ClackData {
+public abstract class ClackData implements Serializable {
     private String username;
     private int type;
     private Date date;
