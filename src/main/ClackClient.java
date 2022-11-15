@@ -279,15 +279,14 @@ public class ClackClient {
 
     public static void main(String[] args) {
         ClackClient client;
-        if((args.length==0)||(args==null)) {
+        if(args.length==0) {
             client=new ClackClient();
         }
         else {
             int indA=args[0].indexOf('@');
-            int indC=args[0].indexOf(':');
-            System.out.println("index @\t"+indA+"\nindex :\t"+indC);
             if(indA!=-1) {
                 String u=args[0].substring(0,indA-1);
+                int indC=args[0].indexOf(':');
                 if(indC!=-1) {
                     String h=args[0].substring(indA,indC-1);
                     String ps=args[0].substring(indC);
