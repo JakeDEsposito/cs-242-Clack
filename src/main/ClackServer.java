@@ -84,9 +84,9 @@ public class ClackServer {
 
                 dataToSendToClient = dataToReceiveFromClient;
 
-                sendData();
-
-                if (!s.isBound())
+                if (s.isConnected())
+                    sendData();
+                else
                     closeConnection = true;
             }
 
@@ -108,6 +108,7 @@ public class ClackServer {
             dataToReceiveFromClient = (ClackData)inFromClient.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println(e);
+            closeConnection = true;
         }
     }
 
@@ -119,6 +120,7 @@ public class ClackServer {
             outToClient.writeObject(dataToSendToClient);
         } catch (IOException ioe) {
             System.err.println(ioe);
+            closeConnection = true;
         }
     }
 
