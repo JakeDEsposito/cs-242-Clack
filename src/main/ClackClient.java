@@ -185,7 +185,7 @@ public class ClackClient {
         try {
             outToServer.writeObject(dataToSendToServer);
         } catch (IOException ioe) {
-            System.err.println(ioe);
+            System.err.println(ioe.getMessage());
         }
     }
 
@@ -288,8 +288,8 @@ public class ClackClient {
                 String u=args[0].substring(0,indA-1);
                 int indC=args[0].indexOf(':');
                 if(indC!=-1) {
-                    String h=args[0].substring(indA,indC-1);
-                    String ps=args[0].substring(indC);
+                    String h=args[0].substring(indA+1,indC);
+                    String ps=args[0].substring(indC+1);
                     int p=-1;
                     try {
                         p=Integer.parseInt(ps);
