@@ -132,6 +132,9 @@ public class ClackClient {
             while (!closeConnection) {
                 readClientData();
 
+                if (closeConnection)
+                    break;
+
                 sendData();
 
                 receiveData();
@@ -195,10 +198,8 @@ public class ClackClient {
     public void receiveData () {
         try {
             dataToReceiveFromServer = (ClackData)inFromServer.readObject();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println(e.getMessage());
         }
     }
 
@@ -252,20 +253,11 @@ public class ClackClient {
      */
     @Override
     public boolean equals (Object other) {
-        if (other instanceof ClackClient) {
-            ClackClient otherClackClient = (ClackClient) other;
-
-            if (!otherClackClient.getUserName().equals(userName))
-                return false;
-            else if (!otherClackClient.getHostName().equals(hostName))
-                return false;
-            else if (!otherClackClient.getPort().equals(port))
-                return false;
-            else
-                return true;
-        }
-        else
-            return false;
+        return
+            other instanceof ClackClient &&
+            ((ClackClient) other).getUserName().equals(userName) &&
+            ((ClackClient) other).getHostName().equals(hostName) &&
+            ((ClackClient) other).getPort().equals(port);
     }
 
     /**
@@ -285,7 +277,7 @@ public class ClackClient {
         else {
             int indA=args[0].indexOf('@');
             if(indA!=-1) {
-                String u=args[0].substring(0,indA-1);
+                String u=args[0].substring(0,indA);
                 int indC=args[0].indexOf(':');
                 if(indC!=-1) {
                     String h=args[0].substring(indA+1,indC);
@@ -294,7 +286,7 @@ public class ClackClient {
                     try {
                         p=Integer.parseInt(ps);
                     } catch (NumberFormatException e) {
-                        System.err.println("Invalid Port\t"+ps);
+                        System.err.println("Invalid Port");
                     }
                     if(p==-1) {
                         client=new ClackClient(u,h);
