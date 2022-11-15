@@ -168,7 +168,7 @@ public class ClackServer {
 
     public static void main(String[] args) {
         ClackServer server;
-        if(args==null) {
+        if((args.length==0)||(args==null)) {
             server=new ClackServer();
         }
         else {

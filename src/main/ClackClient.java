@@ -279,7 +279,7 @@ public class ClackClient {
 
     public static void main(String[] args) {
         ClackClient client;
-        if(args==null) {
+        if((args.length==0)||(args==null)) {
             client=new ClackClient();
         }
         else {
@@ -295,7 +295,7 @@ public class ClackClient {
                     try {
                         p=Integer.parseInt(ps);
                     } catch (NumberFormatException e) {
-                        System.err.println("Invalid Port");
+                        System.err.println("Invalid Port\t"+ps);
                     }
                     if(p==-1) {
                         client=new ClackClient(u,h);
