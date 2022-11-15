@@ -185,7 +185,7 @@ public class ClackClient {
         try {
             outToServer.writeObject(dataToSendToServer);
         } catch (IOException ioe) {
-            System.err.println(ioe);
+            System.err.println(ioe.getMessage());
         }
     }
 
