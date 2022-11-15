@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ClackServer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ClackServer_jar</output-path>
+    <root id="archive" name="ClackServer.jar">
+      <element id="module-output" name="Clack" />
+    </root>
+  </artifact>
+</component>

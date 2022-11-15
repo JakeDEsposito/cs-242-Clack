@@ -166,4 +166,26 @@ public class ClackServer {
         return "Port: " + port;
     }
 
+    public static void main(String[] args) {
+        ClackServer server;
+        if(args==null) {
+            server=new ClackServer();
+        }
+        else {
+            int p=-1;
+            try {
+                p=Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid Port");
+            }
+            if(p==-1) {
+                server=new ClackServer();
+            }
+            else {
+                server=new ClackServer(p);
+            }
+        }
+        server.start();
+    }
+
 }

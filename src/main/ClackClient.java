@@ -277,4 +277,42 @@ public class ClackClient {
         return "Username: " + userName + ", Hostname: " + hostName + ", Port: " + port + ", closeConnection: " + closeConnection;
     }
 
+    public static void main(String[] args) {
+        ClackClient client;
+        if(args==null) {
+            client=new ClackClient();
+        }
+        else {
+            int indA=args[0].indexOf('@');
+            int indC=args[0].indexOf(':');
+            System.out.println("index @\t"+indA+"\nindex :\t"+indC);
+            if(indA!=-1) {
+                String u=args[0].substring(0,indA-1);
+                if(indC!=-1) {
+                    String h=args[0].substring(indA,indC-1);
+                    String ps=args[0].substring(indC);
+                    int p=-1;
+                    try {
+                        p=Integer.parseInt(ps);
+                    } catch (NumberFormatException e) {
+                        System.err.println("Invalid Port");
+                    }
+                    if(p==-1) {
+                        client=new ClackClient(u,h);
+                    }
+                    else {
+                        client = new ClackClient(u, h, p);
+                    }
+                }
+                else {
+                    client=new ClackClient(u,args[0].substring(indA));
+                }
+            }
+            else {
+                client=new ClackClient(args[0]);
+            }
+        }
+        client.start();
+    }
+
 }
