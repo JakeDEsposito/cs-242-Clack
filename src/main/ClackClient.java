@@ -121,6 +121,10 @@ public class ClackClient {
     public void start () {
         inFromStd = new Scanner(System.in);
 
+        ClientSideServerListener cssl = new ClientSideServerListener(this);
+        Thread tcssl = new Thread(cssl);
+        tcssl.start();
+
         try {
             Socket s = new Socket(hostName, port);
 
@@ -136,10 +140,6 @@ public class ClackClient {
                     break;
 
                 sendData();
-
-                receiveData();
-
-                printData();
             }
 
             outToServer.close();
@@ -236,6 +236,14 @@ public class ClackClient {
      */
     public Integer getPort() {
         return port;
+    }
+
+    /**
+     * Returns if the connection is closed
+     * @return boolean
+     */
+    public boolean getCloseConnection () {
+        return closeConnection;
     }
 
     /**
