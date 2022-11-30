@@ -8,20 +8,59 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class ServerSideClientIO implements Runnable{
+    /**
+     * boolean representing whether connection is closed or not
+     */
     private boolean closeConnection;
+
+    /**
+     * data.ClackData object representing data received from the client
+     */
     private ClackData dataToReceiveFromClient;
+
+    /**
+     * data.ClackData object representing data sent to client
+     */
     private ClackData dataToSendToClient;
+
+    /**
+     * ObjectInputStream for receiving data from client
+     */
     private ObjectInputStream inFromClient;
+
+    /**
+     * ObjectOutputStream for sending data from client
+     */
     private ObjectOutputStream outToClient;
+
+    /**
+     *
+     */
     private ClackServer server;
+
+    /**
+     *
+     */
     private Socket clientSocket;
 
+    /**
+     *
+     * @param server
+     * @param clientSocket
+     */
     public ServerSideClientIO(ClackServer server, Socket clientSocket){
         this.server=server;
         this.clientSocket=clientSocket;
         this.closeConnection=false;
+        this.dataToReceiveFromClient = null;
+        this.dataToSendToClient = null;
+        this.outToClient = null;
+        this.inFromClient = null;
     }
 
+    /**
+     *
+     */
     @Override
     public void run(){
         try {
@@ -30,13 +69,16 @@ public class ServerSideClientIO implements Runnable{
 
             while(!closeConnection){
                 receiveData();
-                this.server.broadcast();
+                this.server.broadcast(this.dataToSendToClient);
             }
         } catch(IOException ioe) {
             System.err.println(ioe);
         }
     }
 
+    /**
+     * Receives data from client
+     */
     public void receiveData(){
         try {
             dataToReceiveFromClient = (ClackData)inFromClient.readObject();
@@ -46,6 +88,9 @@ public class ServerSideClientIO implements Runnable{
         }
     }
 
+    /**
+     * Sends data to client, does not return anything
+     */
     public void sendData(){
         try {
             outToClient.writeObject(dataToSendToClient);
@@ -55,6 +100,10 @@ public class ServerSideClientIO implements Runnable{
         }
     }
 
+    /**
+     *
+     * @param dataToSendToClient
+     */
     public void setDataToSendToClient(ClackData dataToSendToClient) {
         this.dataToSendToClient = dataToSendToClient;
     }

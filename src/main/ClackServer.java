@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClackServer {
     /**
@@ -25,24 +26,9 @@ public class ClackServer {
     private boolean closeConnection;
 
     /**
-     * data.ClackData object representing data received from the client
+     * ArrayList of all connected Users
      */
-    private ClackData dataToReceiveFromClient;
-
-    /**
-     * data.ClackData object representing data sent to client
-     */
-    private ClackData dataToSendToClient;
-
-    /**
-     * ObjectOutputStream for sending data from client
-     */
-    private ObjectOutputStream outToClient;
-
-    /**
-     * ObjectInputStream for receiving data from client
-     */
-    private ObjectInputStream inFromClient;
+    private ArrayList<ServerSideClientIO> serverSideClientIOList;
 
     /**
      * Constructor that sets port number, should set dataToReceiveFromClient and dataToSendToClient as null.
@@ -53,10 +39,7 @@ public class ClackServer {
             throw new IllegalArgumentException("port is less than 1024");
 
         this.port = port;
-        dataToReceiveFromClient = null;
-        dataToSendToClient = null;
-        outToClient = null;
-        inFromClient = null;
+        this.serverSideClientIOList=new ArrayList<ServerSideClientIO>();
     }
 
     /**
@@ -67,32 +50,24 @@ public class ClackServer {
     }
 
     /**
-     * Does not return anything, for now it should have no code, just a declaration
+     * Does not return anything
      */
     public void start () {
         try {
             ServerSocket ss = new ServerSocket(port);
-            Socket s = ss.accept();
-
-            outToClient = new ObjectOutputStream(s.getOutputStream());
-            inFromClient = new ObjectInputStream(s.getInputStream());
-
-            closeConnection = false;
 
             while (!closeConnection) {
-                receiveData();
+                Socket s = ss.accept();
 
-                dataToSendToClient = dataToReceiveFromClient;
-
-                if (s.isConnected())
-                    sendData();
-                else
+                if (s.isConnected()){
+                    serverSideClientIOList.add(new ServerSideClientIO(this, s));
+                    serverSideClientIOList.get(serverSideClientIOList.size()-1).run();
+                }
+                else {
                     closeConnection = true;
+                }
             }
 
-            outToClient.close();
-            inFromClient.close();
-            s.close();
             ss.close();
         } catch (IOException ioe) {
             System.err.println(ioe);
@@ -101,27 +76,22 @@ public class ClackServer {
     }
 
     /**
-     * Receives data from client, does not return anything for now it should have no code, just a declaration
+     *
+     * @param dataToBroadcastToClients
      */
-    public void receiveData () {
-        try {
-            dataToReceiveFromClient = (ClackData)inFromClient.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println(e);
-            closeConnection = true;
+    public void broadcast(ClackData dataToBroadcastToClients){
+        for(ServerSideClientIO user : serverSideClientIOList){
+            user.setDataToSendToClient(dataToBroadcastToClients);
+            user.sendData();
         }
     }
 
     /**
-     * Sends data to client, does not return anything, for now it should have no code, just a declaration
+     *
+     * @param serverSideClientToRemove
      */
-    public void sendData () {
-        try {
-            outToClient.writeObject(dataToSendToClient);
-        } catch (IOException ioe) {
-            System.err.println(ioe);
-            closeConnection = true;
-        }
+    public void remove(ServerSideClientIO serverSideClientToRemove){
+        serverSideClientIOList.remove(serverSideClientToRemove);
     }
 
     /**
