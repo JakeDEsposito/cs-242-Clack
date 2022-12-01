@@ -31,6 +31,11 @@ public class ClackServer {
     private ArrayList<ServerSideClientIO> serverSideClientIOList;
 
     /**
+     * String Array of every connected user's name
+     */
+    private ArrayList<String> userList;
+
+    /**
      * Constructor that sets port number, should set dataToReceiveFromClient and dataToSendToClient as null.
      * @param port is for the port
      */
@@ -40,6 +45,7 @@ public class ClackServer {
 
         this.port = port;
         this.serverSideClientIOList=new ArrayList<ServerSideClientIO>();
+        this.userList=new ArrayList<String>();
     }
 
     /**
@@ -91,7 +97,25 @@ public class ClackServer {
      * @param serverSideClientToRemove
      */
     public void remove(ServerSideClientIO serverSideClientToRemove){
-        serverSideClientIOList.remove(serverSideClientToRemove);
+        int temp=serverSideClientIOList.indexOf(serverSideClientToRemove);
+        userList.remove(temp);
+        serverSideClientIOList.remove(temp);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList<String> getUserList(){
+        return userList;
+    }
+
+    /**
+     *
+     * @param n
+     */
+    public void addUsername(String n){
+        userList.add(n);
     }
 
     /**

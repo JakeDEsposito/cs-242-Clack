@@ -1,6 +1,7 @@
 package main;
 
 import data.ClackData;
+import data.MessageClackData;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -66,6 +67,9 @@ public class ServerSideClientIO implements Runnable{
         try {
             outToClient = new ObjectOutputStream(clientSocket.getOutputStream());
             inFromClient = new ObjectInputStream(clientSocket.getInputStream());
+
+            receiveData();
+            server.addUsername(dataToReceiveFromClient.getUsername());
 
             while(!closeConnection){
                 receiveData();

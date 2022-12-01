@@ -133,6 +133,9 @@ public class ClackClient {
 
             closeConnection = false;
 
+            dataToSendToServer=new MessageClackData(userName,userName,ClackData.CONSTANT_SENDMESSAGE);
+            sendData();
+
             while (!closeConnection) {
                 readClientData();
 
@@ -173,7 +176,7 @@ public class ClackClient {
                 }
                 break;
             case "LISTUSERS":
-                // TODO: Will be implemented in next part
+                dataToSendToServer=new MessageClackData(userName,"LISTUSERS",ClackData.CONSTANT_LISTUSERS);
                 break;
             default:
                 // TODO: What is type variable set to CONSTANT_SENDMESSAGE
