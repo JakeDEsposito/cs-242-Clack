@@ -121,10 +121,6 @@ public class ClackClient {
     public void start () {
         inFromStd = new Scanner(System.in);
 
-        ClientSideServerListener cssl = new ClientSideServerListener(this);
-        Thread tcssl = new Thread(cssl);
-        tcssl.start();
-
         try {
             Socket s = new Socket(hostName, port);
 
@@ -132,6 +128,10 @@ public class ClackClient {
             inFromServer = new ObjectInputStream(s.getInputStream());
 
             closeConnection = false;
+
+            ClientSideServerListener cssl = new ClientSideServerListener(this);
+            Thread tcssl = new Thread(cssl);
+            tcssl.start();
 
             while (!closeConnection) {
                 readClientData();
