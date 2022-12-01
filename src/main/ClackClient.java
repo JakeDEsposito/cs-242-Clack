@@ -134,7 +134,7 @@ public class ClackClient {
             tcssl.start();
 
             dataToSendToServer=new MessageClackData(userName,userName,ClackData.CONSTANT_SENDMESSAGE);
-            sendData();
+            sendData();//just to be able to make sure push works
 
             while (!closeConnection) {
                 readClientData();
