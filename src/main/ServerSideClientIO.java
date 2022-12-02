@@ -73,7 +73,15 @@ public class ServerSideClientIO implements Runnable{
 
             while(!closeConnection){
                 receiveData();
-                this.server.broadcast(this.dataToSendToClient);
+                if(this.dataToReceiveFromClient.getType()==ClackData.CONSTANT_LISTUSERS){
+                    this.dataToSendToClient=new MessageClackData("Server",server.getUserList(),ClackData.CONSTANT_SENDMESSAGE);
+                    this.sendData();
+                } else if (this.dataToReceiveFromClient.getType()==ClackData.CONSTANT_LOGOUT) {
+                    this.closeConnection=true;
+                } else {
+                    this.dataToSendToClient=this.dataToReceiveFromClient;
+                    this.server.broadcast(this.dataToSendToClient);
+                }
             }
         } catch(IOException ioe) {
             System.err.println(ioe);

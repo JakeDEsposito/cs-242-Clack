@@ -106,8 +106,12 @@ public class ClackServer {
      *
      * @return
      */
-    public ArrayList<String> getUserList(){
-        return userList;
+    public String getUserList(){
+        String temp="";
+        for(String u:userList){
+            temp.concat(u.concat("\n"));
+        }
+        return temp;
     }
 
     /**
