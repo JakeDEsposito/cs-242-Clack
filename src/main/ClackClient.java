@@ -179,7 +179,6 @@ public class ClackClient {
                 dataToSendToServer=new MessageClackData(userName,"LISTUSERS",ClackData.CONSTANT_LISTUSERS);
                 break;
             default:
-                // TODO: What is type variable set to CONSTANT_SENDMESSAGE
                 dataToSendToServer = new MessageClackData(userName, nextString, ClackData.CONSTANT_SENDMESSAGE);
         }
     }
